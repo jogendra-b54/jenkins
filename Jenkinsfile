@@ -12,16 +12,9 @@ pipeline {
     //     password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     // }
   
-     input {
-             message "Should we continue?"
-             ok "Yes, we should."
-             submitter "alice,bob"
-             parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                }
-    }
+  
 
-    triggers { pollSCM('*/1 * * * *') }
+ //  triggers { pollSCM('*/1 * * * *') }
 
     stages {
         stage('Stage One'){
@@ -39,11 +32,22 @@ pipeline {
                  environment {
                      ENV_URL= "jenkins-pipeline.stage2.google.com"    // Local variable
                 }
+             
+                 input {
+             message "Should we continue?"
+             ok "Yes, we should."
+             submitter "alice,bob"
+             parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+
              steps {
                 echo "This is stage two"
                 echo "Name of the URL is ${ENV_URL}"
              }
         }
+        
         stage('Stage THREE'){
              steps {
                 sh '''
