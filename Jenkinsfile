@@ -47,13 +47,25 @@ pipeline {
                 echo "Name of the URL is ${ENV_URL}"
              }
         }
-        
+
         stage('Stage THREE'){
-             steps {
+            
+            when { branch 'dev'}
+            steps {
                 sh '''
                 echo "This is stage Three"
                 echo "Name of the URL is ${ENV_URL}"
                 echo -e "\\e[32m Hai "   
+                '''
+             }
+        }
+
+        stage('Stage FOUR'){
+            steps {
+                sh '''
+                echo "This is stage Four"
+                echo "Name of the URL is ${ENV_URL}"
+                echo -e "\\e[31m Welcome "   
                 '''
              }
         }
