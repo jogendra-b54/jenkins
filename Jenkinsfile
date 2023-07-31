@@ -30,7 +30,8 @@ pipeline {
 
                 echo "This is stage Three"
                 echo "Name of the URL is ${ENV_URL}"
-                sh echo -e "\e[32m Hai \e[0m"
+                // sh echo -e "\e[32m Hai \e[0m"  # this will give error while build because as per jenkins \ backslahsh is an incorect syntax
+                sh echo -e "\\e[32m Hai \\e[0m"   //tell jenkins this is escape sequence character which we need to add extra \ to build success
              }
         }
 
