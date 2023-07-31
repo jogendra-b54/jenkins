@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         ENV_URL = "pipeline.google.com"    // pipeline variable or Global variable
-       // SSHCRED =  credentials('SSH CRED')
+        SSHCRED =  credentials('SSH CRED')
     }
     stages {
         stage('Stage One'){
@@ -12,7 +12,7 @@ pipeline {
                          echo AWS Training
                          echo Batch54
                          echo Name of the URL is ${ENV_URL}
-                        
+                         env
                 '''
              }
         }
