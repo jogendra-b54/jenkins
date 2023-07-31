@@ -12,7 +12,7 @@ pipeline {
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
 
-    triggers { pollSCM('*/2 * * * *') }
+    triggers { pollSCM('H/2 * * * *') }
 
     stages {
         stage('Stage One'){
