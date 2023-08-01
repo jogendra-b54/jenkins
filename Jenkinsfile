@@ -30,16 +30,17 @@ pipeline {
                             steps {
                                 echo "In Parallel 2"
                                 sleep 15
-                    }
+                             }
+                        }    
                          stage('In Parallel 3') {
                             steps {
                                 echo "In Parallel 3"
                                 sleep 15
-                    }
-
+                            }
+                     }
                 }
             }
-         }
+         
         stage('Stage One'){
              steps {
                 sh '''
