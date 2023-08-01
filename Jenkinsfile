@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'GO'
+        label 'WS'
     }
     environment {
         ENV_URL = "pipeline.google.com"    // pipeline variable or Global variable
