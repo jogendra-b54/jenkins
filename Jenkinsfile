@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'GO'
+    }
     environment {
         ENV_URL = "pipeline.google.com"    // pipeline variable or Global variable
         SSHCRED =  credentials('SSH_CRED')
