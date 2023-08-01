@@ -23,19 +23,19 @@ pipeline {
                         stage('In Parallel 1') {
                             steps {
                                 echo "In Parallel 1"
-                                sleep 15
+                                sleep 1
                             }
                         }
                         stage('In Parallel 2') {
                             steps {
                                 echo "In Parallel 2"
-                                sleep 15
+                                sleep 1
                              }
                         }    
                          stage('In Parallel 3') {
                             steps {
                                 echo "In Parallel 3"
-                                sleep 15
+                                sleep 1
                             }
                      }
                 }
@@ -48,7 +48,7 @@ pipeline {
                          echo AWS Training
                          echo Batch54
                          echo Name of the URL is ${ENV_URL}
-                         sleep 10
+                         sleep 1
                          env
                 '''
              }
@@ -70,7 +70,7 @@ pipeline {
              steps {
                 echo "This is stage two"
                 echo "Name of the URL is ${ENV_URL}"
-                sleep  10
+                sleep  1
              }
         }
 
@@ -87,7 +87,7 @@ pipeline {
                 echo "This is stage Three"
                 echo "Name of the URL is ${ENV_URL}"
                 echo -e "\\e[32m Hai "   
-                sleep  10
+                sleep  1
                 '''
              }
         }
@@ -98,15 +98,15 @@ pipeline {
                 echo "This is stage Four"
                 echo "Name of the URL is ${ENV_URL}"
                 echo -e "\\e[31m Welcome "   
-                sleep  10
+                sleep  1
                 '''
              }
         }
 
     }
     post { 
-        aborted {
-            echo 'I will always say HI When JOB is ABORTED!'
+        always {
+            cleanWs()
         }
     }
     
