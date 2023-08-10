@@ -1,11 +1,11 @@
-pipeline {
+/*pipeline {
     agent {
         label 'WS'
     }
     environment {
         ENV_URL = "pipeline.google.com"    // pipeline variable or Global variable
         SSHCRED =  credentials('SSH_CRED')
-    }
+    }*/
     //  parameters {
     //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
     //     text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
@@ -18,7 +18,7 @@ pipeline {
 
  //  triggers { pollSCM('*/1 * * * *') }
 
-    stages {
+ /*   stages {
 
          stage('Parallel Stages') {
                     parallel {
@@ -83,35 +83,44 @@ pipeline {
                 anyOf {
                      branch 'dev'
                      changeset "**/*.js" 
-                }
-            }
-            steps {
-                sh '''
-                echo "This is stage Three"
-                echo "Name of the URL is ${ENV_URL}"
-                echo -e "\\e[32m Hai "   
-                sleep  1
-                '''
-             }
-        }
+//                 }
+//             }
+//             steps {
+//                 sh '''
+//                 echo "This is stage Three"
+//                 echo "Name of the URL is ${ENV_URL}"
+//                 echo -e "\\e[32m Hai "   
+//                 sleep  1
+//                 '''
+//              }
+//         }
 
-        stage('Stage FOUR'){
-            steps {
-                sh '''
-                echo "This is stage Four"
-                echo "Name of the URL is ${ENV_URL}"
-                echo -e "\\e[31m Welcome "   
-                sleep  1
-                '''
-             }
-        }
+//         stage('Stage FOUR'){
+//             steps {
+//                 sh '''
+//                 echo "This is stage Four"
+//                 echo "Name of the URL is ${ENV_URL}"
+//                 echo -e "\\e[31m Welcome "   
+//                 sleep  1
+//                 '''
+//              }
+//         }
 
-    }
-    post { 
-        always {
-            cleanWs()
-        }
-    }
+//     }
+//     post { 
+//         always {
+//             cleanWs()
+//         }
+//     }
     
 
+// }
+
+
+// Example of Scripted Pipeline
+
+node {
+    stage('Test') {
+        print 'Welcome to Scripted pipelines'
+    }
 }
