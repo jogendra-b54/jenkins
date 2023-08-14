@@ -70,30 +70,32 @@
             //     }
             // }
 
-             steps {
-                echo "This is stage two"
-                echo "Name of the URL is ${ENV_URL}"
-                sleep  1
-             }
-        }
+        //      steps {
+        //         echo "This is stage two"
+        //         echo "Name of the URL is ${ENV_URL}"
+        //         sleep  1
+        //      }
+        // }
 
-        stage('Stage THREE'){
+        // stage('Stage THREE'){
             
-            when {  
-                anyOf {
-                     branch 'dev'
-                     changeset "**/*.js" 
-//                 }
-//             }
-//             steps {
-//                 sh '''
-//                 echo "This is stage Three"
-//                 echo "Name of the URL is ${ENV_URL}"
-//                 echo -e "\\e[32m Hai "   
-//                 sleep  1
-//                 '''
-//              }
-//         }
+        //     when {  
+        //         anyOf {
+        //              branch 'dev'
+        //              //
+        
+                 //  
+        //          }
+        //      }
+        //      steps {
+        //          sh '''
+        //          echo "This is stage Three"
+        //          echo "Name of the URL is ${ENV_URL}"
+        //          echo -e "\\e[32m Hai "   
+        //          sleep  1
+        //          '''
+        //       }
+        //  }
 
 //         stage('Stage FOUR'){
 //             steps {
