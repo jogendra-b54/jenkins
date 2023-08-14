@@ -1,11 +1,11 @@
-/*pipeline {
-    agent {
-        label 'WS'
-    }
-    environment {
-        ENV_URL = "pipeline.google.com"    // pipeline variable or Global variable
-        SSHCRED =  credentials('SSH_CRED')
-    }*/
+// pipeline {
+//     agent {
+//         label 'WS'
+//     }
+//     environment {
+//         ENV_URL = "pipeline.google.com"    // pipeline variable or Global variable
+//         SSHCRED =  credentials('SSH_CRED')
+//     }
     //  parameters {
     //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
     //     text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
@@ -18,48 +18,48 @@
 
  //  triggers { pollSCM('*/1 * * * *') }
 
- /*   stages {
+//    stages {
 
-         stage('Parallel Stages') {
-                    parallel {
-                        stage('In Parallel 1') {
-                            steps {
-                                echo "In Parallel 1"
-                                sh "sleep 1"
-                                sh "hostname"
-                            }
-                        }
-                        stage('In Parallel 2') {
-                            steps {
-                                echo "In Parallel 2"
-                                sleep 1
-                             }
-                        }    
-                         stage('In Parallel 3') {
-                            steps {
-                                echo "In Parallel 3"
-                                sleep 1
-                            }
-                     }
-                }
-            }
+//          stage('Parallel Stages') {
+//                     parallel {
+//                         stage('In Parallel 1') {
+//                             steps {
+//                                 echo "In Parallel 1"
+//                                 sh "sleep 1"
+//                                 sh "hostname"
+//                             }
+//                         }
+//                         stage('In Parallel 2') {
+//                             steps {
+//                                 echo "In Parallel 2"
+//                                 sleep 1
+//                              }
+//                         }    
+//                          stage('In Parallel 3') {
+//                             steps {
+//                                 echo "In Parallel 3"
+//                                 sleep 1
+//                             }
+//                      }
+//                 }
+//             }
          
-        stage('Stage One'){
-             steps {
-                sh '''
-                         echo DevOps Training
-                         echo AWS Training
-                         echo Batch54
-                         echo Name of the URL is ${ENV_URL}
-                         sleep 1
-                         env
-                '''
-             }
-        }
-         stage('Stage Two'){
-                 environment {
-                     ENV_URL= "jenkins-pipeline.stage2.google.com"    // Local variable
-                }
+        // stage('Stage One'){
+        //      steps {
+        //         sh '''
+        //                  echo DevOps Training
+        //                  echo AWS Training
+        //                  echo Batch54
+        //                  echo Name of the URL is ${ENV_URL}
+        //                  sleep 1
+        //                  env
+        //         '''
+        //      }
+        // }
+        //  stage('Stage Two'){
+        //          environment {
+        //              ENV_URL= "jenkins-pipeline.stage2.google.com"    // Local variable
+        //         }
              
             //      input {
             //         message "Should we continue?"
@@ -82,7 +82,8 @@
         //     when {  
         //         anyOf {
         //              branch 'dev'
-        //              //
+        //              changeset "**/*.js" 
+        //              
         
                  //  
         //          }
