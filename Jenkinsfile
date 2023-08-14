@@ -126,4 +126,14 @@ node {
     stage('Test') {
         print 'Welcome to Scripted pipelines'
     }
+    stage('Deploy') {
+        print 'Deploying'
+    }
+    stage('Run only on Master Branch') {
+        if(env.BRANCH_NAME == 'master') {
+            echo 'I only execute on the master branch'
+        } else {
+            echo 'I execute elsewhere'
+        }
+    }
 }
