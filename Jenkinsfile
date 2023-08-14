@@ -123,16 +123,13 @@
 // Example of Scripted Pipeline
 
 node {
-    stage('Test') {
-        print 'Welcome to Scripted pipelines'
-    }
-    stage('Deploy') {
-        print 'Deploying'
-        sh "env"
-    }
-    if(env.BRANCH_NAME == 'main') {
-    stage('Run only on Main Branch') {
-            echo 'I only execute on the main branch'
-        } 
+    stage('Example') {
+        if(env.BRANCH_NAME == 'master') {
+        echo 'I only execute on the master branch'
+    }   else {
+            echo 'I execute elsewhere'
+            sh "env"
+         }
+
     }
 }
