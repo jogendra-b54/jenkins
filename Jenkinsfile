@@ -128,13 +128,11 @@ node {
     }
     stage('Deploy') {
         print 'Deploying'
+        sh "env"
     }
     if(env.BRANCH_NAME == 'main') {
     stage('Run only on Main Branch') {
-      {
-            echo 'I only execute on the master branch'
-        } else {
-            echo 'I execute elsewhere'
-        }
+            echo 'I only execute on the main branch'
+        } 
     }
 }
