@@ -44,8 +44,10 @@ pipeline {
             stage('Creating-Catalogue') {
                    steps {
                        dir('catalogue') {  git branch: 'main', url: 'https://github.com/jogendra-b54/catalogue.git'
-                            sh "cd mutable-infra"
-                            sh "ls -ltr"
+                            sh '''
+                                cd mutable-infra
+                                ls -ltr
+                            '''
                             // sh "terrafile -f env-${ENV}/Terrafile"
                             // sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
                             // sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.8"
