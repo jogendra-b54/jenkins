@@ -39,13 +39,13 @@ pipeline {
                     }
                 }
 
-        //  stage('=============Terraform CREATING BACKEND COMPONENTS============================') {
-        //     steps {
-        //         sh '''
-        //         echo "\033[1;43m =========Creating Backend Component Started==== \033[0m"
-        //         '''
-        //     }
-        //  }
+         stage('=============Terraform CREATING BACKEND COMPONENTS============================') {
+            steps {
+                sh '''
+                echo "\033[1;43m =========Creating Backend Component Started==== \033[0m"
+                '''
+            }
+         }
          
 
              stage('Creating-User') {
@@ -54,7 +54,6 @@ pipeline {
                              sh  '''
                                  echo "\033[41m=============== STARTING USER ===========\033[0m"
                                  cd mutable-infra
-                                 ls -ltr
                                  terrafile -f env-${ENV}/Terrafile
                                  terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                                  terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4
@@ -71,7 +70,7 @@ pipeline {
                             echo "\033[45m ==========STARTING SHIPPING ============ \033[0m"
                             cd mutable-infra
                             sleep 30
-                            terrafile -f env-${ENV}/Terrafile"
+                            terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                             terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4  -auto-approve
                         '''
@@ -127,6 +126,7 @@ pipeline {
                         dir('cart') {  git branch: 'main', url: 'https://github.com/jogendra-b54/cart.git'
                             sh ''' 
                                      cd mutable-infra
+                                     echo "\033[1;43m =========STARTING CART Component ==== \033[0m"
                                      terrafile -f env-${ENV}/Terrafile
                                      terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars  -reconfigure
                                      terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4
