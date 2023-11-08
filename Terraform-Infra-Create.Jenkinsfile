@@ -76,18 +76,18 @@ pipeline {
                     }
              stage('Creating-Cart') {
                     steps {
-                        dir('CART') {  git branch: 'main', url: 'https://github.com/jogendra-b54/cart.git'
+                        dir('cart') {  git branch: 'main', url: 'https://github.com/jogendra-b54/cart.git'
                             sh "cd mutable-infra"
                             sh "terrafile -f env-${ENV}/Terrafile"
                             sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars  -reconfigure"
-                                sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4"
-                                sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4 -auto-approve"
+                            sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4"
+                            sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4 -auto-approve"
                                 }
                             }
                         }
             stage('Creating-Shipping') {
                 steps {
-                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/jogendra-b54/shipping.git'
+                    dir('shipping') {  git branch: 'main', url: 'https://github.com/jogendra-b54/shipping.git'
                          sh '''
                             cd mutable-infra
                             sleep 30
@@ -101,7 +101,7 @@ pipeline {
                     
             stage('Creating-Payment') {
                 steps {
-                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/jogendra-b54/payment.git'
+                    dir('payment') {  git branch: 'main', url: 'https://github.com/jogendra-b54/payment.git'
                             sh "cd mutable-infra"
                             sh "sleep 30"
                             sh "terrafile -f env-${ENV}/Terrafile"
