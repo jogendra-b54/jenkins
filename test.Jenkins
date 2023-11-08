@@ -48,6 +48,6 @@ pipeline {
                             sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.8 -auto-approve"
                             }
                         }
-        
+                }
           }
 }
