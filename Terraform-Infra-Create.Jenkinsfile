@@ -96,7 +96,7 @@ pipeline {
 
             stage('Creating-Frontend') {
                 steps {
-                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/jogendra-b54/frontend.git'
+                    dir('frontend') {  git branch: 'main', url: 'https://github.com/jogendra-b54/frontend.git'
                             sh '''
                             echo "\033[46m ===========STARTING FRONEND============== \033[0m"
                             cd mutable-infra
