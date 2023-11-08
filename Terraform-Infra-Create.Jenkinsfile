@@ -48,6 +48,8 @@ pipeline {
                                 cd mutable-infra
                                 terrafile -f env-${ENV}/Terrafile
                                 terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
+                                terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.8
+                                terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.8 -auto-approve
                             '''
                             // 
                             // sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
