@@ -94,33 +94,33 @@ pipeline {
                         }
                     } 
                     
-            // stage('Creating-Payment') {
-            //     steps {
-            //         dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/jogendra-b54/payment.git'
-            //                 sh "cd mutable-infra"
-            //                 sh "sleep 30"
-            //                 sh "terrafile -f env-${ENV}/Terrafile"
-            //                 sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars  -reconfigure"
-            //                 sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.3"
-            //                 sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.3 -auto-approve"
-            //                 }
-            //             }
-            //         }
+            stage('Creating-Payment') {
+                steps {
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/jogendra-b54/payment.git'
+                            sh "cd mutable-infra"
+                            sh "sleep 30"
+                            sh "terrafile -f env-${ENV}/Terrafile"
+                            sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars  -reconfigure"
+                            sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.3"
+                            sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.3 -auto-approve"
+                            }
+                        }
+                    }
 
                 } 
             }
                     
-            // stage('Creating-Frontend') {
-            //     steps {
-            //         dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/jogendra-b54/frontend.git'
-            //                 sh "cd mutable-infra"
-            //                 sh "terrafile -f env-${ENV}/Terrafile"
-            //                 sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
-            //                 sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.3 -auto-approve"
-            //              }
-            //          }
-            //     }
-           // }    
+            stage('Creating-Frontend') {
+                steps {
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/jogendra-b54/frontend.git'
+                            sh "cd mutable-infra"
+                            sh "terrafile -f env-${ENV}/Terrafile"
+                            sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
+                            sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.3 -auto-approve"
+                         }
+                     }
+                }
+           }    
        }
 }                        
 
