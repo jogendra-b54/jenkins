@@ -43,7 +43,7 @@ pipeline {
            parallel {
             stage('Creating-Catalogue') {
                    steps {
-                       dir('Catalogue') {  git branch: 'main', url: 'https://github.com/jogendra-b54/catalogue.git'
+                       dir('catalogue') {  git branch: 'main', url: 'https://github.com/jogendra-b54/catalogue.git'
                             sh "cd mutable-infra"
                             sh "terrafile -f env-${ENV}/Terrafile"
                             sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
