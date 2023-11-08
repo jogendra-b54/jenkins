@@ -39,7 +39,7 @@ pipeline {
                     }
                 }
 
-         stage('=============Terraform CREATING BACKEND COMPONENTS============================') {
+         stage('BACKENDCOMPONENTS=') {
             parallel {
                 stage('Creating-Catalogue') {
                    steps {
