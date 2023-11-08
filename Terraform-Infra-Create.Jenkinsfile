@@ -60,6 +60,8 @@ pipeline {
                              sh  '''
                                  cd mutable-infra
                                  ls -ltr
+                                 terrafile -f env-${ENV}/Terrafile
+                                 terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                              '''
                              }
                          }
