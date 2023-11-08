@@ -39,8 +39,8 @@ pipeline {
                     }
                 }
 
-        stage('Backend') {
-           parallel {
+        // stage('Backend') {
+           //parallel {
             stage('Creating-Catalogue') {
                    steps {
                        dir('catalogue') {  git branch: 'main', url: 'https://github.com/jogendra-b54/catalogue.git'
@@ -116,6 +116,6 @@ pipeline {
             //              }
             //          }
             //     }
-            }    
-        }                        
+           // }    
+       // }                        
 
