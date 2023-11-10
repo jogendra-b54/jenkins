@@ -40,9 +40,8 @@ pipeline {
                     }
                 }
 
-         stage('BACKENDCOMPONENTS=') {
-            parallel {
-                stage('Creating-Catalogue') {
+         stage('BACKEND-START') {}
+         stage('Creating-Catalogue') {
                    steps {
                        dir('catalogue') {  git branch: 'main', url: 'https://github.com/jogendra-b54/catalogue.git'
                             sh '''
@@ -82,9 +81,9 @@ pipeline {
                                      terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4
                                      terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4 -auto-approve
                             '''
-                                }
                             }
-                        }
+                    }
+                }
 
             stage('Creating-Shipping') {
                 steps {
@@ -116,9 +115,6 @@ pipeline {
                             }
                         }
                     }
-               }     
-            }         
-
             stage('Creating-Frontend') {
                 steps {
                     dir('frontend') {  git branch: 'main', url: 'https://github.com/jogendra-b54/frontend.git'
@@ -132,10 +128,14 @@ pipeline {
                          }
                      }
                 }
+            }     
+        }         
+
+            
              
               
-            }
-}
+            
+
        
                       
 
