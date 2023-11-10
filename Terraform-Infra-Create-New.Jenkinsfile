@@ -41,7 +41,7 @@ pipeline {
                 }
 
          stage('BACKEND-START') {
-            step{
+            steps {
                 sh '''
                 echo "\033[41m=============== BACKEND CIOMPONENT STARTED ===========\033[0m
                 ''' 
