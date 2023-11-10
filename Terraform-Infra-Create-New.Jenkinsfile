@@ -42,7 +42,7 @@ pipeline {
 
          stage('BACKEND-START') {
             step{
-                sh "echo "\033[41m=============== BACKEND CIOMPONENT STARTED ===========\033[0m" "
+                sh "echo "\033[41m=============== BACKEND CIOMPONENT STARTED ===========\033[0m"
             }
          }
          stage('Creating-Catalogue') {
