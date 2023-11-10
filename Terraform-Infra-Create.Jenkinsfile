@@ -1,7 +1,8 @@
 pipeline {
-    agent { 
+    agent {
         label 'WS'
-    } 
+    }
+     
     parameters {
         choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Select The Environment')
     }
@@ -39,16 +40,24 @@ pipeline {
                     }
                 }
 
-         stage('=============Terraform CREATING BACKEND COMPONENTS============================') {
-            steps {
-                sh '''
-                echo "\033[1;43m =========Creating Backend Component Started==== \033[0m"
-                '''
-            }
-         }
-         
-
-             stage('Creating-User') {
+         stage('BACKEND')
+			{	
+			  parallel {
+				stage('Creating-Catalogue') {
+                   steps {
+                       dir('catalogue') {  git branch: 'main', url: 'https://github.com/jogendra-b54/catalogue.git'
+                            sh '''
+                                cd mutable-infra
+                                echo "\033[44m STARTING CATALOGUE \033[0m"
+                                terrafile -f env-${ENV}/Terrafile
+                                terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
+                                terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.8
+                                terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.8 -auto-approve
+                            '''
+                            }
+                        }
+                  }
+                stage('Creating-User') {
                     steps {
                        dir('user') {  git branch: 'main', url: 'https://github.com/jogendra-b54/user.git'
                              sh  '''
@@ -63,9 +72,24 @@ pipeline {
                          }
                     }
             
-            stage('Creating-Shipping') {
-                steps {
-                    dir('shipping') {  git branch: 'main', url: 'https://github.com/jogendra-b54/shipping.git'
+				stage('Creating-Cart') {
+                    steps {
+                        dir('cart') {  git branch: 'main', url: 'https://github.com/jogendra-b54/cart.git'
+                            sh ''' 
+                                     cd mutable-infra
+                                     echo "\033[1;43m =========STARTING CART Component ==== \033[0m"
+                                     terrafile -f env-${ENV}/Terrafile
+                                     terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars  -reconfigure
+                                     terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4
+                                     terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4 -auto-approve
+                            '''
+                            }
+                    }
+                }
+
+                stage('Creating-Shipping') {
+					steps {
+                      dir('shipping') {  git branch: 'main', url: 'https://github.com/jogendra-b54/shipping.git'
                          sh '''
                             echo "\033[45m ==========STARTING SHIPPING ============ \033[0m"
                             cd mutable-infra
@@ -77,10 +101,10 @@ pipeline {
                             }
                         }
                     } 
-                    
-            stage('Creating-Payment') {
-                steps {
-                    dir('payment') {  git branch: 'main', url: 'https://github.com/jogendra-b54/payment.git'
+               
+                stage('Creating-Payment') {
+                    steps {
+                        dir('payment') {  git branch: 'main', url: 'https://github.com/jogendra-b54/payment.git'
                             sh '''
                             echo "\033[1;43m =======STARTING PAYMENT======= \033[0m"
                             cd mutable-infra
@@ -93,10 +117,11 @@ pipeline {
                             }
                         }
                     }
-
-            stage('Creating-Frontend') {
-                steps {
-                    dir('frontend') {  git branch: 'main', url: 'https://github.com/jogendra-b54/frontend.git'
+				}
+             }				
+                stage('Creating-Frontend') {
+                   steps {
+                      dir('frontend') {  git branch: 'main', url: 'https://github.com/jogendra-b54/frontend.git'
                             sh '''
                             echo "\033[46m ===========STARTING FRONEND============== \033[0m"
                             cd mutable-infra
@@ -107,36 +132,14 @@ pipeline {
                          }
                      }
                 }
-             stage('Creating-Catalogue') {
-                   steps {
-                       dir('catalogue') {  git branch: 'main', url: 'https://github.com/jogendra-b54/catalogue.git'
-                            sh '''
-                                cd mutable-infra
-                                echo "\033[44m STARTING CATALOGUE \033[0m"
-                                terrafile -f env-${ENV}/Terrafile
-                                terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                                terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.8
-                                terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.8 -auto-approve
-                            '''
-                            }
-                        }
-                  }
-              stage('Creating-Cart') {
-                    steps {
-                        dir('cart') {  git branch: 'main', url: 'https://github.com/jogendra-b54/cart.git'
-                            sh ''' 
-                                     cd mutable-infra
-                                     echo "\033[1;43m =========STARTING CART Component ==== \033[0m"
-                                     terrafile -f env-${ENV}/Terrafile
-                                     terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars  -reconfigure
-                                     terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4
-                                     terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4 -auto-approve
-                            '''
-                                }
-                            }
-                        }
-            }
-}
+            }     
+        }         
+
+            
+             
+              
+            
+
        
                       
 
