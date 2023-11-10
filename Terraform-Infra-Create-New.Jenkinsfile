@@ -40,13 +40,7 @@ pipeline {
                     }
                 }
 
-         stage('BACKEND-START') {
-            steps {
-                sh '''
-                echo "\033[41m=============== BACKEND CIOMPONENT STARTED ===========\033[0m
-                ''' 
-            }
-         }
+         
          stage('Creating-Catalogue') {
                    steps {
                        dir('catalogue') {  git branch: 'main', url: 'https://github.com/jogendra-b54/catalogue.git'
