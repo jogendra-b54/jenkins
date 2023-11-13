@@ -78,8 +78,8 @@ pipeline {
                                      echo "\033[1;43m =========STARTING CART Component ==== \033[0m"
                                      terrafile -f env-${ENV}/Terrafile
                                      terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars  -reconfigure
-                                     terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4
-                                     terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.4 -auto-approve
+                                     terraform plan -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.5
+                                     terraform apply -var-file=env-${ENV}/${ENV}.tfvars  -var APP_VERSION=0.0.5 -auto-approve
                             '''
                             }
                     }
