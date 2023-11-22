@@ -2,6 +2,7 @@ pipeline {
     agent {
         label 'WS'
     } 
+    
     parameters {
         choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Select The Environment')
     }
