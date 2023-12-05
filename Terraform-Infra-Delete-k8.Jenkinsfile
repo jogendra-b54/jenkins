@@ -10,7 +10,7 @@ pipeline {
         
         stage('Destroying-EKS') {
             steps {
-                dir('EKS') {  git branch: 'main', url: 'https://github.com/b54-clouddevops/kubernetes.git'
+                dir('EKS') {  git branch: 'main', url: 'https://github.com/jogendra-b54/kubernetes.git'
 
                         sh ''' 
                             cd eks 
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Destroy Databases') {
             steps {
-                git branch: 'main', url: 'https://github.com/b54-clouddevops/terraform-databases.git'
+                git branch: 'main', url: 'https://github.com/jogendra-b54/terraform-databases.git'
                 sh "terrafile -f env-${ENV}/Terrafile"
                 sh "terraform init --backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
                 sh "terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve"
@@ -31,7 +31,7 @@ pipeline {
 
         stage('Terraform Destroy Network') {
             steps {
-                git branch: 'main', url: 'https://github.com/b54-clouddevops/terraform-vpc.git'
+                git branch: 'main', url: 'https://github.com/jogendra-b54/terraform-vpc.git'
                 sh "terrafile -f env-${ENV}/Terrafile"
                 sh "terraform init --backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
                 sh "terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve"
